@@ -53,7 +53,6 @@
                                         <th>ID</th>
                                         <th>Имя</th>
                                         <th>Фамилия</th>
-                                        <th>Возраст</th>
                                         <th>Email</th>
                                         <th>Роль</th>
                                         <th>Редактировать</th>
@@ -77,10 +76,6 @@
                                     <div class="mb-3">
                                         <label for="lastName" class="form-label">Фамилия</label>
                                         <input type="text" class="form-control" id="lastName" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="age" class="form-label">Возраст</label>
-                                        <input type="number" class="form-control" id="age" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
@@ -118,7 +113,6 @@
                                 <th>ID</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Age</th>
                                 <th>Email</th>
                                 <th>Role</th>
                             </tr>
@@ -156,10 +150,6 @@
                     <div class="mb-3">
                         <label for="editLastName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="editLastName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editAge" class="form-label">Age</label>
-                        <input type="number" class="form-control" id="editAge" required>
                     </div>
                     <div class="mb-3">
                         <label for="editEmail" class="form-label">Email</label>
@@ -209,21 +199,15 @@
                         <input type="text" class="form-control" id="deleteLastName" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="deleteAge" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="deleteAge" readonly>
-                    </div>
-                    <div class="mb-3">
                         <label for="deleteEmail" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="deleteEmail" readonly>
+                        <input type="email" class="form-control" id="deleteEmail" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="deleteRole" class="form-label">Role</label>
-                        <select class="form-select" id="deleteRole" disabled>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="USER">USER</option>
-                        </select>
+                        <input type="text" class="form-control" id="deleteRole" readonly>
                     </div>
                 </form>
+                <p>Are you sure you want to delete this user?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -237,4 +221,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
