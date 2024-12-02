@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -26,12 +28,15 @@ import java.util.function.Function;
 public class UserService implements UserDetailsService {
 
 
-    @Qualifier("userRepository")
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @PostConstruct
     public void init() {
@@ -112,9 +117,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id);
     }
 
-
-    public User addUser(User user) {
-        return userRepository.save(user);
+    public User addUser(User user, BindingResult bindingResult) {
+        // Проводим валидацию вручную, если есть ошибки
+        if (bindingResult.hasErrors()) {
+            // Обработка ошибок, если необходимо
+            return null;  // Или выбросить исключение, если валидация не прошла
+        }
+        return userRepository.save(user);  // Сохраняем пользователя в базе
     }
 
 
