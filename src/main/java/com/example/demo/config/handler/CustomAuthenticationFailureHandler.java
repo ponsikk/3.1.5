@@ -1,4 +1,4 @@
-package com.example.demo.configs.handler;
+package com.example.demo.config.handler;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;

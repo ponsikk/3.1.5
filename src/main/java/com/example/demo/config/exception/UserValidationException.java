@@ -1,4 +1,4 @@
-package com.example.demo.configs.exception;
+package com.example.demo.config.exception;
 
 
 import com.example.demo.model.User;

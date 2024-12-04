@@ -1,31 +1,47 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import org.springframework.security.core.GrantedAuthority;
 
-public enum  Role implements GrantedAuthority {
-    ROLE_USER,
-    ROLE_ADMIN,
-    ROLE_GUEST;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "roles")
+public  class Role extends AbstractEntity<Integer> implements GrantedAuthority {
+    private static final long serialVersionUID = 7217778059836250424L;
+
+    @Column(unique = true)
+    private String name;
+
+//    @ManyToMany(mappedBy = "roles")
+//    private List<User> users = new ArrayList<>();
+
+    public Role() {
+    }
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role(Integer id) {
+        this.setId(id);
+    }
+
+    public String getName() {
+        return name.substring(5);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String getAuthority() {
-        return name();
+        return name;
     }
 
-    @JsonCreator
-    public static Role fromString(String role) {
-        switch (role.toUpperCase()) {
-            case "USER":
-                return ROLE_USER;
-            case "ADMIN":
-                return ROLE_ADMIN;
-            case "GUEST":
-                return ROLE_GUEST;
-            default:
-                throw new IllegalArgumentException("Unknown role: " + role);
-        }
+    @Override
+    public String toString() {
+        return String.format("Role [id = %d; name = %s;]", this.getId(), name);
     }
 }
-

@@ -1,9 +1,9 @@
-package com.example.demo.configs;
+package com.example.demo.config;
 
-import com.example.demo.configs.handler.CustomAccessDeniedHandler;
-import com.example.demo.configs.handler.CustomAuthenticationFailureHandler;
-import com.example.demo.configs.handler.CustomAuthenticationSuccessHandler;
-import com.example.demo.configs.handler.CustomUrlLogoutSuccessHandler;
+import com.example.demo.config.handler.CustomAccessDeniedHandler;
+import com.example.demo.config.handler.CustomAuthenticationFailureHandler;
+import com.example.demo.config.handler.CustomAuthenticationSuccessHandler;
+import com.example.demo.config.handler.CustomUrlLogoutSuccessHandler;
 import com.example.demo.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
