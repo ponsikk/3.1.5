@@ -1,20 +1,33 @@
 package com.example.demo.model;
 
 
+
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
+
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
+@Data
 @Table(name = "roles")
-public  class Role extends AbstractEntity<Integer> implements GrantedAuthority {
+public class Role implements GrantedAuthority {
     private static final long serialVersionUID = 7217778059836250424L;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(unique = true)
     private String name;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private List<User> users = new ArrayList<>();
+    @Transient
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
     public Role() {
     }
@@ -23,25 +36,8 @@ public  class Role extends AbstractEntity<Integer> implements GrantedAuthority {
         this.name = name;
     }
 
-    public Role(Integer id) {
-        this.setId(id);
-    }
-
-    public String getName() {
-        return name.substring(5);
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String getAuthority() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Role [id = %d; name = %s;]", this.getId(), name);
+        return getName();
     }
 }
