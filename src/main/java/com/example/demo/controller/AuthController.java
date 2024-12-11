@@ -20,6 +20,6 @@ public class AuthController {
 
     @GetMapping
     public String showHomePage() {
-        return "/;
+        return "login";
     }
 }

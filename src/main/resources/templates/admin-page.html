@@ -37,6 +37,45 @@
         .form-label {
             color: black;
         }
+        /* Левое меню */
+        .sidebar {
+            position: absolute;
+            top: 56px;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 1rem;
+            border-right: 1px solid #dee2e6;
+        }
+        .sidebar ul {
+            padding-left: 0;
+            list-style: none;
+        }
+        .sidebar .nav-item {
+            margin-bottom: 10px;
+        }
+        .sidebar .nav-link {
+            color: #ffffff;
+            background-color: #495057;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #6c757d;
+            color: #ffffff;
+        }
+        .sidebar .nav-link.active {
+            background-color: #007bff;
+            color: #ffffff;
+            border-color: #007bff;
+        }
+        .content {
+            margin-left: 220px; /* Ширина боковой панели + отступ */
+        }
     </style>
 
     <meta charset="UTF-8">
@@ -55,95 +94,108 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- Левая панель -->
-        <div class="col-md-2 px-0">
-            <div class="d-flex flex-column flex-shrink-0 p-0 text-white">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a href="/admin" class="nav-link active">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/user" class="nav-link">User</a>
-                    </li>
-                </ul>
+<div class="sidebar">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a href="/admin" class="nav-link active">Admin</a>
+        </li>
+        <li class="nav-item">
+            <a href="/user" class="nav-link">User</a>
+        </li>
+    </ul>
+</div>
+
+<main class="content">
+    <h1 class="mt-3">Admin panel</h1>
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs" id="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="#users-table" id="adminUsersTable" data-toggle="tab">Users table</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#new-user" data-toggle="tab">New User</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4">
+        <!-- Таблица -->
+        <div class="tab-pane fade show active" id="users-table">
+            <div class="header-section mb-1" style="color: black; background-color: #e9ecef; border-bottom: 2px solid #dee2e6; padding: 0.5rem 1rem;">
+                <h3>All users</h3>
             </div>
+            <table class="table table-striped ">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>LastName</th>
+                    <th>E-mail</th>
+                    <th>Roles</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                </tbody>
+            </table>
         </div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light">
-            <h1 class="mt-3">Admin panel</h1>
-            <!-- Вкладки -->
-            <ul class="nav nav-tabs" id="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#users-table" id="adminUsersTable" data-toggle="tab">Users table</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#new-user" data-toggle="tab">New User</a>
-                </li>
-            </ul>
-
-            <div class="tab-content mt-4">
-                <!-- Таблица -->
-                <div class="tab-pane fade show active" id="users-table">
-                    <div class="header-section mb-1" style="color: black; background-color: #e9ecef; border-bottom: 2px solid #dee2e6; padding: 0.5rem 1rem;">
-                        <h3>All users</h3>
-                    </div>
-                    <table class="table table-striped ">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>LastName</th>
-                            <th>E-mail</th>
-                            <th>Roles</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody id="usersTableBody">
-                        </tbody>
-                    </table>
-                </div>
-
-                <!--Вкладка добавления пользователя-->
-                <div class="tab-pane fade" id="new-user">
-                    <div class="header-section mb-3" style="color: black; background-color: #e9ecef;
-                    border-bottom: 2px solid #dee2e6; padding: 0.5rem 1rem; text-align: center;">
-                        <h3>Add new user</h3>
-                    </div>
-                    <form id="addUserForm" method="post" class="text-center">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label" style="font-weight: bold;">First name</label>
-                            <input type="text" class="form-control w-25 mx-auto" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label" style="font-weight: bold;">Last name</label>
-                            <input type="text" class="form-control w-25 mx-auto" id="lastName" name="lastName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label" style="font-weight: bold;">Email</label>
-                            <input type="text" class="form-control w-25 mx-auto" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="username" class="form-label" style="font-weight: bold;">Username</label>
-                            <input type="text" class="form-control w-25 mx-auto" id="username" name="username" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label" style="font-weight: bold;">Password</label>
-                            <input type="password" class="form-control w-25 mx-auto" id="password" name="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="role" class="form-label" style="font-weight: bold;">Role</label>
-                            <select class="form-select w-25 mx-auto" id="role" name="roles" multiple></select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Add new user</button>
-                    </form>
-                </div>
+        <!-- Вкладка добавления пользователя -->
+        <div class="tab-pane fade" id="new-user">
+            <div class="header-section mb-3" style="color: black; background-color: #e9ecef;
+    border-bottom: 2px solid #dee2e6; padding: 0.5rem 1rem; text-align: center;">
+                <h3>Add New User</h3>
             </div>
-        </main>
+            <form id="addUserForm" method="post" class="container">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <div class="row mb-3 align-items-center">
+                    <label for="firstName" class="col-sm-3 col-form-label text-right" style="font-weight: bold;">First Name:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                    <label for="lastName" class="col-sm-3 col-form-label text-right" style="font-weight: bold;">Last Name:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                    <label for="email" class="col-sm-3 col-form-label text-right" style="font-weight: bold;">Email:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                    <label for="username" class="col-sm-3 col-form-label text-right" style="font-weight: bold;">Username:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                    <label for="password" class="col-sm-3 col-form-label text-right" style="font-weight: bold;">Password:</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                    <label for="role" class="col-sm-3 col-form-label text-right" style="font-weight: bold;">Role:</label>
+                    <div class="col-sm-9">
+                        <select class="form-select form-control" id="role" name="roles" multiple>
+                            <!-- Роли будут добавлены здесь через JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-success">Add New User</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
     </div>
 </div>
 
@@ -186,8 +238,10 @@
                         <input type="password" class="form-control" id="editPassword" name="password">
                     </div>
                     <div class="mb-3">
-                        <label for="editRoles" class="form-label fw-bold">Roles</label>
-                        <select class="form-select" id="editRoles" name="roles" multiple></select>
+                        <label for="editRoles" class="form-label fw-bold">Roles:</label>
+                        <select class="form-select w-100" id="editRoles" name="roles" multiple>
+
+                        </select>
                     </div>
                 </form>
             </div>
@@ -272,52 +326,70 @@
     }
 
 
-    document.getElementById('addUserForm').addEventListener('submit', e => {
-        e.preventDefault();
+    document.getElementById('addUserForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Останавливаем стандартное поведение формы
 
-        saveUser();
+        const roles = Array.from(document.getElementById('role').selectedOptions).map(option => ({
+            id: parseInt(option.getAttribute('data-id')),
+            name: option.getAttribute('data-name')
+        }));
 
-        async function saveUser() {
+        const newUser = {
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value,
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            roles
+        };
 
-            let addRoles = [];
-            let options = document.getElementById('role').options;
-
-            for (let opt of options) {
-                if (opt.selected) {
-                    let id = parseInt(opt.getAttribute('data-id'));
-                    let name = opt.getAttribute('data-name');
-                    let authority = opt.getAttribute('data-authority');
-                    addRoles.push({id, name, authority});
-                }
-            }
-
-            console.log(addRoles);
-
-            const newUser = JSON.stringify({
-                username: $('#username').val(),
-                password: $('#password').val(),
-                firstName: $('#firstName').val(),
-                lastName: $('#lastName').val(),
-                email: $('#email').val(),
-                roles: addRoles
-            });
-
-            console.log(newUser);
-
-
-            await fetch('api/users', {
+        try {
+            const response = await fetch('/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: newUser
-            }).then(() => {
-                $('#addUserForm')[0].reset();
-                getAllUsers();
-                $('#adminUsersTable').click();
-            })
+                body: JSON.stringify(newUser) // Отправляем данные нового пользователя
+            });
+
+            if (response.ok) {
+                document.getElementById('addUserForm').reset(); // Сбрасываем форму
+                await getAllUsers(); // Обновляем таблицу пользователей
+            } else {
+                console.error('Ошибка при добавлении пользователя');
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
         }
     });
+
+    document.getElementById('editUserForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Останавливаем стандартное поведение формы
+
+        const modal = $('#editUserModal');
+        const user = collectUserData(); // Собираем данные из формы
+
+        try {
+            const response = await fetch(`/api/users`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user) // Отправляем данные пользователя
+            });
+
+            if (response.ok) {
+                modal.modal('hide'); // Закрываем модальное окно
+                await getAllUsers(); // Обновляем таблицу пользователей
+            } else {
+                console.error('Ошибка при обновлении пользователя');
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    });
+
+
 
     async function openModalHandler(actionId, userId = null) {
 
