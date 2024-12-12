@@ -274,7 +274,7 @@
 
 
     async function adminInfo() {
-        const response = await fetch('/api/user', {
+        const response = await fetch('/admin/user', {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         });
@@ -286,7 +286,7 @@
     }
 
     async function getAllUsers() {
-        const response = await fetch('/api/users', {
+        const response = await fetch('/admin/users', {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         });
@@ -314,7 +314,7 @@
 
     async function loadRoles() {
 
-        const response = await fetch('/api/roles', {
+        const response = await fetch('/admin/roles', {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         });
@@ -350,7 +350,7 @@
         };
 
         try {
-            const response = await fetch('/api/users', {
+            const response = await fetch('/admin/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -382,7 +382,7 @@
         const user = collectUserData(); // Собираем данные из формы
 
         try {
-            const response = await fetch(`/api/users`, {
+            const response = await fetch(`/admin/users`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -459,7 +459,7 @@
     }
 
     async function getUser(userId) {
-        const response = await fetch(`/api/users/${userId}`, {
+        const response = await fetch(`/admin/users/${userId}`, {
             method: 'GET', headers: {'Content-Type': 'application/json'}
         });
 
@@ -537,11 +537,11 @@
         await getAllUsers();
     }
 
-    const deleteUser = async ({id}) => fetch(`/api/users/${id}`, {
+    const deleteUser = async ({id}) => fetch(`/admin/users/${id}`, {
         method: 'DELETE', headers: {'Content-Type': 'application/json'}
     });
 
-    const editUser = async (user) => fetch(`/api/users`, {
+    const editUser = async (user) => fetch(`/admin/users`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)

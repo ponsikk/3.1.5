@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin")
 @EnableAutoConfiguration
 public class AdminRestController {
 
@@ -28,6 +31,15 @@ public class AdminRestController {
         this.userService = userService;
         this.roleService = roleService;
     }
+
+    @GetMapping
+    public ModelAndView showAdminPage(Principal principal) {
+        User user = (User) userService.loadUserByUsername(principal.getName());
+        ModelAndView modelAndView = new ModelAndView("admin-page");
+        modelAndView.addObject("currentUser", user);
+        return modelAndView;
+    }
+
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> showAllUsers() {
