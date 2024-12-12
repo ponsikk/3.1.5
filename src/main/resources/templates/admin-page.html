@@ -286,7 +286,7 @@
     }
 
     async function getAllUsers() {
-        const response = await fetch('/admin/users', {
+        const response = await fetch('/admin/get-all', {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         });
@@ -350,7 +350,7 @@
         };
 
         try {
-            const response = await fetch('/admin/users', {
+            const response = await fetch('/admin/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -376,18 +376,18 @@
 
 
     document.getElementById('editUserForm').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Останавливаем стандартное поведение формы
+        e.preventDefault();
 
         const modal = $('#editUserModal');
-        const user = collectUserData(); // Собираем данные из формы
+        const user = collectUserData();
 
         try {
-            const response = await fetch(`/admin/users`, {
+            const response = await fetch(`/admin/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(user) // Отправляем данные пользователя
+                body: JSON.stringify(user)
             });
 
             if (response.ok) {
@@ -459,7 +459,7 @@
     }
 
     async function getUser(userId) {
-        const response = await fetch(`/admin/users/${userId}`, {
+        const response = await fetch(`/admin/get/${userId}`, {
             method: 'GET', headers: {'Content-Type': 'application/json'}
         });
 
@@ -537,11 +537,11 @@
         await getAllUsers();
     }
 
-    const deleteUser = async ({id}) => fetch(`/admin/users/${id}`, {
+    const deleteUser = async ({id}) => fetch(`/admin/delete/${id}`, {
         method: 'DELETE', headers: {'Content-Type': 'application/json'}
     });
 
-    const editUser = async (user) => fetch(`/admin/users`, {
+    const editUser = async (user) => fetch(`/admin/update`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
